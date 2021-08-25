@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    <!--hover 마우스 접근하면 글자색 변경됨-->
+    span:hover{
+        color:yellow;
+    }
+    span#name:hover >sup{
+        color:red;
+    }
+    sup{
+        display:none;
+    }
+    a#naver:hover > sup{
+        display:inline;
+    }
+    a#daum:hover > sup{
+        display:block;
+    }
+
+</style>
+
+</head>
+<body>
+    <span><font size = 50>최현준</font></span>
+    <br>
+    <span id = "name">최현준<sup>학생</sup></span>
+    <br>
+    <a id="naver" href="http://www.naver.com">네이버
+    <sup>www.naver.com</sup>
+    </a>
+    <br>
+    <a id="daum" href="http://www.daum.net">다음
+    <sup>www.daum.net</sup>
+    </a>
+
+
+</body>
+</html>
