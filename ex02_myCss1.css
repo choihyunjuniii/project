@@ -1,0 +1,26 @@
+div{
+    width : 100px;
+    height : 100px;
+    background-color: red;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%; 
+    
+}
+#div2{
+margin-left :100px;
+background-color :green;
+border-top-right-radius: 50%;
+border-bottom-left-radius: 50%;
+}
+#div3{
+margin-left :200px;
+background-color :blue;
+border-top-right-radius: 50%;
+border-bottom-left-radius: 50%;
+}
+#div4{
+margin-left :300px;
+background-color :gray;
+border-top-right-radius: 50%;
+border-bottom-left-radius: 50%;
+}
