@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <!--name 속성값이 있어야함-->
+        <!--value : 기본 값을 지정해줌-->
+        <!--placeholder : 흐릿한 글자를 출력하는 기능-->
+        아이디 : <input placeholder = "아이디입력" type="text" name ="서버에서 값을 구분하기 위한 값">
+        <br>
+        비밀번호 : <input type="password" name ="">
+        <br>
+        <!--radio type에서 하나의 그룹으로 묶는 것 >> name에 동일한 값주기-->
+        <!--value 속성을 추가해야함>> 버튼을 클릭했을때 전달받을 값
+        value속성이 없을 경우 on/off값이 전달됨-->
+        성별 : 남 <input type="radio" name ="gender" value ="남자">
+                여 <input type="radio" name ="gender" value = "여자">
+                <br>
+                <!--checkbox도 동일한 name을 지정해줘야 나중에 값을 한번에 받아올 수 있음-->
+        취미 : 축구 <input type="checkbox" value = "축구" name = "hobby">
+                운동<input type="checkbox" value = "운동" name = "hobby">
+                헬스<input type="checkbox" value = "헬스" name = "hobby">
+                <br>
+                색깔 : <input type="color">
+                <br>
+                혈액형 : <select name="">
+                    <option value="">A형</option>
+                    <option value="">B형</option>
+                    <option value="">O형</option>
+                    <option value="">AB형</option>
+                </select>
+                <br>
+                <textarea placeholder = "추가 사항" name= "" id="" cols="50" row="20" style =  "resize : none"></textarea>
+                <br>
+                생일 : <input type="date">
+                <br>
+                <!--제출버튼-->
+                <input type="submit" value = "전송">
+                <input type="reset" value = "다시">
+
+            </form>
+</body>
+</html>
