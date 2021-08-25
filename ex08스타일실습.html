@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #div1{
+            width: 200px;
+            height:200px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <button onclick = "circle()">원만들기</button>
+    <button onclick = "rec()">직사각형만들기</button>
+
+    <script>
+        let div = document.getElementById("div1");
+        //1.원클릭했을때 상자가 색 : 주황/모양 : 원
+        function circle(){ 
+            div.style.backgroundColor = "orange";
+            div.style.borderRadius= "50%";
+            div.style.width = "200px";
+        }
+        //2.사각형클릭시  상자가 색 : 노랑/모양 : 직사각형
+        function rec(){ 
+            div.style.backgroundColor = "yellow";
+            div.style.width = "600px";
+            div.style.borderRadius = "0";
+        }
+    </script>
+</body>
+</html>

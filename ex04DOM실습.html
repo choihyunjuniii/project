@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1"></div>
+    
+
+    <button onclick="H1()">어디운동</button>
+    <button onclick="A()">모를땐 검색</button>
+    <button onclick="UL()">운동종목</button>
+
+    <script>
+        str = document.getElementById("div1")
+//H1기능을 실행했을 때 DIV태그에 내용으로 <h1>글자</h1>
+        function H1() {
+            let div = document.getElementById("div1")
+            div.innerHTML = "<h>가슴운동</h>"
+        }
+        function A() {
+            let div = document.getElementById("div1")
+            div.innerHTML += "<a href = 'https://www.google.com'>Google로 가보자!</a>"
+        }
+        function UL() {
+            let div = document.getElementById("div1")
+            div.innerHTML += "<ul><li>벤치프레스</li><li>케이블플라이</li><li>딥스</li></ul>"
+        }
+    </script>
+</body>
+</html>
