@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>정했다 오늘은 어깨와 팔!
+        <br>
+        어깨 전면15분 측면15분 후면15분
+        <br>
+        팔 이두15분 삼두15분
+        <br>
+        총 1시간15분
+    </h1>
+    <script>
+//h1태그에 클릭했을때 배경>pink/글자>white
+//h1태그에 마우스를 올렸으 때 배경>green/글자>white
+        $("h1").on({
+            'click' : function(){
+                $("h1").css("color","white");
+                $("body").css("background-color", "pink");
+            },
+            'mouseover' : function(){
+                $("h1").css("color","white");
+                $("body").css("background-color", "green");
+            }
+        })
+    </script>
+</body>
+</html>

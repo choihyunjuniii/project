@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>오늘은 등이다</h1>
+    <script>
+        //태그내의 컨텐츠를 가지고올때는 .html() / .text()
+        console.log($('h1').html());
+        $("h1").html("<span>등이랑 어깨도 해야지</span>");
+        //$("h1").text("<span>등이랑 어깨도 해야지</span>");  //이건태그도 다보임
+//단일스타일처리
+        // $("h1").css("color", "yellow");
+        // $("h1").css("font-size", "50px");
+        // $("h1").css('background-color','black');
+
+        //다중스타일 처리
+        $("h1").css({
+            color : "yellow",
+            fontSize : "50px",
+            backgroundColor : "black"
+        });
+    
+    </script>
+
+</body>
+</html>
