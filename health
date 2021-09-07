@@ -1,0 +1,615 @@
+package health_test;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
+import health_test.db.Sql;
+
+public class asd {
+	Sql sql = new Sql("good","1234");
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					asd window = new asd();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public asd() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(100, 88, 251, 132);
+		frame.getContentPane().add(textArea);
+		
+		String query = String.format("select * from routine where parts = '%s'" , "��");
+	      String[][] buf = sql.executeQuery(query, 1, 7);
+	      String startm = buf[0][2]; //0�� 2�� ���� �������ڴ� >>�̰��� String Ÿ��
+	      
+	      textArea.setText(startm);
+	}
+
+}
+
+package health_test;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class asdasd extends JFrame{
+	
+	
+    public asdasd(){
+    	
+    	
+    // 테이블에 출력할 컬럼 이름 배열
+        String columnNames[] = {"이름","전화번호","주소" };
+     
+    // 테이블에 출력할 데이터 배열
+        String data[][] ={
+                {"이순신","1044","충남 논산"},
+                {"프로도","4444","경기 성남"},
+                {"실바나스","9999","스콜지"},};
+     
+        DefaultTableModel model = new DefaultTableModel(data,columnNames);
+        JTable tbl = new JTable(model);
+   
+        JScrollPane scoll =new JScrollPane(tbl);
+        add(scoll);
+
+        //setTitle("Alive");
+     
+        setBounds(100,100,300,300);
+        setVisible(true);
+        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+         
+    }
+
+}
+
+package health_test;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+import health_test.db.Sql;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class frmLogin {
+
+	private JFrame frame;
+	private JTextField txtID;
+	private JPasswordField txtPW;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frmLogin window = new frmLogin();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public frmLogin() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 739, 460);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		txtID = new JTextField();
+		txtID.setBounds(182, 142, 339, 21);
+		frame.getContentPane().add(txtID);
+		txtID.setColumns(10);
+		
+		JButton btnLogin = new JButton("login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = txtID.getText();
+				String pw = txtPW.getText();
+				if (id.length() > 0 && pw.length() > 0) {
+					Sql sql = new Sql("test", "test");
+					
+					String query = String.format("select id from member where id = '%s' and pw = '%s'", id, pw);
+					String buffer[] = sql.executeQuery(query, 1, 1);
+					if (buffer[0] != null) {
+						System.out.println("로그인 성공");
+					}else {
+						System.out.println("로그인 실패");
+					}
+					
+					sql.disConnect();
+				}
+				
+			}
+		});
+		btnLogin.setBounds(369, 234, 151, 37);
+		frame.getContentPane().add(btnLogin);
+		
+		JLabel lbRegister = new JLabel("register");
+		lbRegister.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new frmRegister();
+			}
+		});
+		lbRegister.setFont(new Font("굴림", Font.PLAIN, 16));
+		lbRegister.setBounds(238, 244, 124, 15);
+		frame.getContentPane().add(lbRegister);
+		
+		txtPW = new JPasswordField();
+		txtPW.setBounds(182, 173, 339, 21);
+		frame.getContentPane().add(txtPW);
+	}
+}
+
+package health_test;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTextPane;
+
+import health_test.db.Sql;
+import javax.swing.ButtonGroup;
+
+public class frmRegister {
+
+	private JFrame frame;
+	
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
+	private final ButtonGroup buttonGroup_3 = new ButtonGroup();
+	/**
+	 * Launch the application.
+	 */
+
+
+	/**
+	 * Create the application.
+	 */
+	public frmRegister() {
+		initialize();
+		frame.setVisible(true);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 868, 750);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("id");
+		lblNewLabel.setBounds(78, 75, 57, 15);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblUsePw = new JLabel("use pw");
+		lblUsePw.setBounds(78, 112, 57, 15);
+		frame.getContentPane().add(lblUsePw);
+		
+		JLabel lblUserPw = new JLabel("user pw2");
+		lblUserPw.setBounds(78, 147, 57, 15);
+		frame.getContentPane().add(lblUserPw);
+		
+		JLabel lblName = new JLabel("name");
+		lblName.setBounds(78, 180, 57, 15);
+		frame.getContentPane().add(lblName);
+		
+		JLabel lblGender = new JLabel("gender");
+		lblGender.setBounds(78, 205, 57, 15);
+		frame.getContentPane().add(lblGender);
+		
+		JLabel lblAge = new JLabel("age");
+		lblAge.setBounds(78, 237, 57, 15);
+		frame.getContentPane().add(lblAge);
+		
+		JLabel lblMail = new JLabel("phone");
+		lblMail.setBounds(78, 274, 57, 15);
+		frame.getContentPane().add(lblMail);
+		
+		JLabel lblNewLabel_1 = new JLabel("운동경력");
+		lblNewLabel_1.setBounds(78, 369, 57, 15);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		JRadioButton rdLv2 = new JRadioButton("3-6개월");
+		buttonGroup_2.add(rdLv2);
+		rdLv2.setBounds(213, 403, 121, 23);
+		frame.getContentPane().add(rdLv2);
+		
+		JRadioButton rdLv1 = new JRadioButton("3개월이하");
+		rdLv1.setSelected(true);
+		buttonGroup_2.add(rdLv1);
+		rdLv1.setBounds(78, 403, 121, 23);
+		frame.getContentPane().add(rdLv1);
+		
+		JRadioButton rdLv3 = new JRadioButton("1년이상");
+		buttonGroup_2.add(rdLv3);
+		rdLv3.setBounds(395, 403, 121, 23);
+		frame.getContentPane().add(rdLv3);
+		
+		JRadioButton rdLv4 = new JRadioButton("3년이상");
+		buttonGroup_2.add(rdLv4);
+		rdLv4.setBounds(576, 403, 121, 23);
+		frame.getContentPane().add(rdLv4);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("운동목표");
+		lblNewLabel_1_1.setBounds(78, 533, 108, 15);
+		frame.getContentPane().add(lblNewLabel_1_1);
+		
+		JTextPane txtPW = new JTextPane();
+		txtPW.setBounds(179, 106, 198, 21);
+		frame.getContentPane().add(txtPW);
+		
+		JTextPane txtPWCheck = new JTextPane();
+		txtPWCheck.setBounds(179, 137, 198, 21);
+		frame.getContentPane().add(txtPWCheck);
+		
+		JTextPane txtName = new JTextPane();
+		txtName.setBounds(179, 174, 198, 21);
+		frame.getContentPane().add(txtName);
+		
+		JTextPane txtAge = new JTextPane();
+		txtAge.setBounds(179, 237, 198, 21);
+		frame.getContentPane().add(txtAge);
+		
+		JTextPane txtPhone = new JTextPane();
+		txtPhone.setBounds(179, 268, 198, 21);
+		frame.getContentPane().add(txtPhone);
+		
+		JTextPane txtID = new JTextPane();
+		txtID.setBounds(179, 75, 198, 21);
+		frame.getContentPane().add(txtID);
+
+		JRadioButton rdGenderMan = new JRadioButton("남자");
+		rdGenderMan.setSelected(true);
+		buttonGroup_1.add(rdGenderMan);
+		rdGenderMan.setBounds(175, 201, 80, 23);
+		frame.getContentPane().add(rdGenderMan);
+		
+		JRadioButton rdGenderWoman = new JRadioButton("여자");
+		buttonGroup_1.add(rdGenderWoman);
+		rdGenderWoman.setBounds(280, 201, 74, 23);
+		frame.getContentPane().add(rdGenderWoman);
+		
+		JRadioButton rdTarget1 = new JRadioButton("다이어투");
+		buttonGroup_3.add(rdTarget1);
+		rdTarget1.setSelected(true);
+		rdTarget1.setBounds(78, 577, 121, 23);
+		frame.getContentPane().add(rdTarget1);
+		
+		JRadioButton rdTarget2 = new JRadioButton("멸치탈출");
+		buttonGroup_3.add(rdTarget2);
+		rdTarget2.setBounds(213, 577, 121, 23);
+		frame.getContentPane().add(rdTarget2);
+		
+		JRadioButton rdTarget3 = new JRadioButton("바디프로필");
+		buttonGroup_3.add(rdTarget3);
+		rdTarget3.setBounds(395, 577, 121, 23);
+		frame.getContentPane().add(rdTarget3);
+		
+		JButton btnNewButton = new JButton("submit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sql sql = new Sql("test", "test");
+				// click
+				String id = txtID.getText();
+				String pw = txtPW.getText();
+				String pwCheck = txtPWCheck.getText();
+				String name = txtName.getText();
+				String gender = rdGenderMan.isSelected() ? "M" : "W";
+				String age = txtAge.getText();
+				String phoneNumber = txtPhone.getText();
+			
+				int healthLevel = rdLv1.isSelected() ? 1 : rdLv2.isSelected() ? 2 : rdLv3.isSelected() ? 3 : 4;
+				System.out.println(healthLevel);
+				
+				int healthTarget = rdTarget1.isSelected() ? 1 : rdTarget2.isSelected() ? 2 : 3;
+				System.out.println(healthTarget);
+				
+								
+				
+				if (id.length() > 0 && pw.length() > 0 && pwCheck.length() > 0 && name.length() > 0 && age.length() > 0 && phoneNumber.length() > 0) 	
+				{
+					if (id.length() >= 4) 
+					{
+						if (pw.length() >= 8 && pwCheck.length() >= 8) 
+						{
+							if (pw.equals(pwCheck)) 
+							{
+								
+								
+								String query = String.format("select id from member where id = '%s'", id);
+								String buffer[] = sql.executeQuery(query, 1, 1);
+							
+								if (buffer[0] == null) {
+									query = String.format("INSERT INTO member (id, pw, name, gender, age, phone_number, lv, tar) VALUES('%s', '%s', '%s', '%s', %s, '%s', %s, %s)",
+														id, pw, name, gender, age, phoneNumber, healthLevel, healthTarget);
+			
+									if (sql.executeUpdate(query) > 0) {
+										JOptionPane.showMessageDialog(null, "가입 성공", "", JOptionPane.INFORMATION_MESSAGE);
+									}else {
+										JOptionPane.showMessageDialog(null, "가입 실패", "", JOptionPane.ERROR_MESSAGE);
+									}
+									
+								}else {
+									JOptionPane.showMessageDialog(null, "이미 존재하는 아이디 입니다.", "", JOptionPane.ERROR_MESSAGE);
+								}
+								
+								
+							}else {
+								JOptionPane.showMessageDialog(null, "비밀번호가 서로 일치하지 않습니다.", "", JOptionPane.ERROR_MESSAGE);
+							}
+							
+						}else {
+							JOptionPane.showMessageDialog(null, "비밀번호는 8글자 이상이여야 합니다.", "", JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "아이디는 4글자 이상이여야 합니다.", "", JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "입력 값이 없는 필드가 존재합니다.", "", JOptionPane.ERROR_MESSAGE);
+				}
+					
+			
+				sql.disConnect();
+			}
+		});
+		btnNewButton.setBounds(669, 142, 128, 91);
+		frame.getContentPane().add(btnNewButton);
+		
+
+		
+	}
+}
+
+package health_test;
+
+
+import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import com.teamdev.jxbrowser.browser.Browser;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.view.swing.BrowserView;
+
+
+public class JxBrowser {
+
+	public static void main(String[] args) {
+		System.setProperty("jxbrowser.license.key", "1BNDHFSC1FZ3QAYCHJ88JCWXCEEI2LN6UV89DBCEG3ZLTGU2X8XD1RJQ6U8F1NI5DFM8RN");
+		
+		Engine engine = Engine.newInstance(HARDWARE_ACCELERATED);
+		Browser browser = engine.newBrowser();
+		 
+		SwingUtilities.invokeLater(() -> {
+		  BrowserView view = BrowserView.newInstance(browser);
+		 
+		  JFrame frame = new JFrame("Swing BrowserView");
+		  frame.add(view, BorderLayout.CENTER);
+		  frame.setSize(700, 500);
+		  frame.setVisible(true);
+		 
+		  browser.navigation().loadUrl("http://youtube.com");
+		});
+	}
+
+}
+
+package health_test;
+
+import health_test.db.Sql;
+
+public class test{
+
+	public static void main(String[] args) {
+		Sql sql = new Sql("good", "1234");
+		String query = String.format("INSERT INTO member (id, pw, name, gender, age, phone_number, lv, tar) VALUES('%s', '%s', '%s', '%s', %s, '%s', %s, %s",
+				"id", "pw", "name", "W", "21", "010-1231-1231", 1, 2);
+
+		System.out.println(query);
+		String str1 = String.format("INSERT INTO board (bid, id, title, content) VALUES(10, 'test_id', 'test_title', 'test_content')", 5);
+		sql.executeUpdate(str1);
+		
+		
+		String str2 = String.format("select * from member where id = '%s'", "test_id");
+		 
+		String[][] tmp = sql.executeQuery(str2, 1, 7);
+		
+		for (int i = 0; i < tmp.length; i++)
+			System.out.println(tmp[i]);
+		
+	
+		sql.disConnect();
+		System.out.println(sql.isConnected);
+		
+		
+	}
+	
+	
+
+
+}
+
+package health_test;
+
+import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class test_board {
+
+	private JFrame frame;
+	private JTable table;
+
+	// 이미지 받아오기
+	ImageIcon img1 = new ImageIcon("localhost:8888/view/Pictures/K-001.jpg");
+	// 이미지 불러오기
+	Image get_img1 = img1.getImage();
+	
+	// Jlable 크기로 사진 크기 수정
+	Image scaled_img1 = get_img1.getScaledInstance(141, 111,Image.SCALE_SMOOTH);
+	
+	// 변경한 사진을 ImageIcon으로 변경
+	ImageIcon change_img1 = new ImageIcon(scaled_img1);
+	
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					test_board window = new test_board();
+					window.frame.setVisible(true);
+			
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+		});
+	}
+	
+
+	/**
+	 * Create the application.
+	 */
+	public test_board() {
+		initialize();
+
+
+		
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 809, 675);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
+				System.out.println(row);
+//				for (int i = 0; i < table.getColumnCount(); i++) {
+//					System.out.println(row);
+//					 //System.out.print(table.getModel().getValueAt(row,i )+"\t\n"); 
+//				}
+			}
+		});
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column"
+			}
+		));
+		table.setBounds(67, 69, 623, 114);
+		frame.getContentPane().add(table);
+		
+		JLabel lblNewLabel = new JLabel(change_img1);
+		lblNewLabel.setBounds(185, 327, 321, 181);
+		frame.getContentPane().add(lblNewLabel);
+		
+		
+		// 값, x, y
+		table.setValueAt("asdasd", 0, 0);
+		table.setValueAt("ㅅㅂ", 0, 1);
+
+		
+	}
+}
